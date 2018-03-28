@@ -41,7 +41,7 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         this.excludeMetricsPattern = MetricsProcessorHelper.createPattern(excludeMetrics);
     }
 
-    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch) {
+    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch,String accountName) {
         return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch,
                 NAMESPACE,
                 excludeMetricsPattern,
