@@ -9,60 +9,56 @@
 package com.appdynamics.extensions.aws.redshift;
 
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
-import com.amazonaws.services.cloudwatch.model.Metric;
-import com.appdynamics.extensions.aws.config.MetricType;
+import com.appdynamics.extensions.aws.config.Dimension;
+import com.appdynamics.extensions.aws.config.IncludeMetric;
+import com.appdynamics.extensions.aws.dto.AWSMetric;
 import com.appdynamics.extensions.aws.metric.NamespaceMetricStatistics;
 import com.appdynamics.extensions.aws.metric.StatisticType;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessorHelper;
+import com.appdynamics.extensions.aws.predicate.MultiDimensionPredicate;
+import com.appdynamics.extensions.metrics.Metric;
+import org.apache.log4j.Logger;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
- * @author Satish Muddam
+ * @author Vishaka Sekar
  */
 public class RedshiftMetricsProcessor implements MetricsProcessor {
 
     private static final String NAMESPACE = "AWS/Redshift";
-
-    private static final String[] DIMENSIONS = {"NodeID", "ClusterIdentifier"};
-
-    private List<MetricType> metricTypes;
-
-    private Pattern excludeMetricsPattern;
-
-    public RedshiftMetricsProcessor(List<MetricType> metricTypes,
-                                    Set<String> excludeMetrics) {
-        this.metricTypes = metricTypes;
-        this.excludeMetricsPattern = MetricsProcessorHelper.createPattern(excludeMetrics);
-    }
-
-    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch,String accountName) {
-        return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch,
-                NAMESPACE,
-                excludeMetricsPattern,
-                DIMENSIONS);
-    }
-
-    public StatisticType getStatisticType(Metric metric) {
-        return MetricsProcessorHelper.getStatisticType(metric, metricTypes);
-    }
-
-    public Map<String, Double> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
-        Map<String, String> dimensionToMetricPathNameDictionary = new HashMap<String, String>();
-        dimensionToMetricPathNameDictionary.put(DIMENSIONS[0], "Node ID");
-        dimensionToMetricPathNameDictionary.put(DIMENSIONS[1], "Cluster Identifier");
-
-        return MetricsProcessorHelper.createMetricStatsMapForUpload(namespaceMetricStats,
-                dimensionToMetricPathNameDictionary, false);
-    }
+    private List<IncludeMetric> includeMetrics;
+    private List<Dimension> dimensions;
 
     public String getNamespace() {
         return NAMESPACE;
     }
 
+    private static final Logger logger = Logger.getLogger(RedshiftMetricsProcessor.class);
+
+    public RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
+        this.includeMetrics = includeMetrics;
+        this.dimensions = dimensions;
+    }
+
+    @Override
+    public List<AWSMetric> getMetrics(AmazonCloudWatch awsCloudWatch, String accountName, LongAdder awsRequestsCounter) {
+        MultiDimensionPredicate multiDimensionPredicate = new MultiDimensionPredicate(dimensions);
+        return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch, awsRequestsCounter,
+                NAMESPACE,
+                includeMetrics,
+                null, multiDimensionPredicate);
+    }
+
+    @Override
+    public StatisticType getStatisticType(AWSMetric awsMetric) {
+        return MetricsProcessorHelper.getStatisticType(awsMetric.getIncludeMetric(), includeMetrics);
+    }
+
+    @Override
+    public List<Metric> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
+        return null;
+    }
 }

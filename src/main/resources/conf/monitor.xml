@@ -9,6 +9,7 @@
 <monitor>
     <name>AWS Redshift Monitor</name>
     <type>managed</type>
+    <enabled>true</enabled>
     <description>AWS Redshift Monitoring Extension</description>
     <monitor-configuration></monitor-configuration>
     <monitor-run-task>
@@ -21,8 +22,8 @@
         <execution-timeout-in-secs>60</execution-timeout-in-secs>
         
 		<task-arguments>
-			<argument name="config-file" is-required="true" default-value="monitors/AWSRedshiftMonitor/conf/config.yaml" />
-			<argument name="region-endpoints-config" is-required="true" default-value="monitors/AWSRedshiftMonitor/conf/region-endpoints.yaml" />
+			<argument name="config-file" is-required="true" default-value="monitors/AWSRedshiftMonitor/config.yml" />
+
 		</task-arguments>
             
         <java-task>

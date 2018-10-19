@@ -8,60 +8,65 @@
 
 package com.appdynamics.extensions.aws.redshift;
 
-import static com.appdynamics.extensions.aws.Constants.METRIC_PATH_SEPARATOR;
-
 import com.appdynamics.extensions.aws.SingleNamespaceCloudwatchMonitor;
 import com.appdynamics.extensions.aws.collectors.NamespaceMetricStatisticsCollector;
 import com.appdynamics.extensions.aws.config.Configuration;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * @author Satish Muddam
+ * @author Vishaka Sekar
  */
 public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configuration> {
 
-    private static final Logger LOGGER = Logger.getLogger("com.singularity.extensions.aws.RedshiftMonitor");
+    private static final Logger LOGGER = Logger.getLogger(RedshiftMonitor.class);
 
-    private static final String DEFAULT_METRIC_PREFIX = String.format("%s%s%s%s",
-            "Custom Metrics", METRIC_PATH_SEPARATOR, "Amazon Redshift", METRIC_PATH_SEPARATOR);
+    public RedshiftMonitor(){super(Configuration.class);}
 
-    public RedshiftMonitor() {
-        super(Configuration.class);
-        LOGGER.info(String.format("Using AWS Redshift Monitor Version [%s]",
-                this.getClass().getPackage().getImplementationTitle()));
+    @Override
+    protected List<Map<String, ?>> getServers() {
+        return null;
     }
 
     @Override
-    protected NamespaceMetricStatisticsCollector getNamespaceMetricsCollector(
-            Configuration config) {
+    public String getMonitorName() {
+        return null;
+    }
+
+    @Override
+    protected String getDefaultMetricPrefix() {
+        return null;
+    }
+
+    @Override
+    protected NamespaceMetricStatisticsCollector getNamespaceMetricsCollector(Configuration config) {
         MetricsProcessor metricsProcessor = createMetricsProcessor(config);
 
         return new NamespaceMetricStatisticsCollector
                 .Builder(config.getAccounts(),
                 config.getConcurrencyConfig(),
                 config.getMetricsConfig(),
-                metricsProcessor)
-                .withCredentialsEncryptionConfig(config.getCredentialsDecryptionConfig())
+                metricsProcessor,
+                config.getMetricPrefix())
+                .withCredentialsDecryptionConfig(config.getCredentialsDecryptionConfig())
                 .withProxyConfig(config.getProxyConfig())
                 .build();
     }
 
     @Override
     protected Logger getLogger() {
-        return LOGGER;
-    }
-
-    @Override
-    protected String getMetricPrefix(Configuration config) {
-        return StringUtils.isNotBlank(config.getMetricPrefix()) ?
-                config.getMetricPrefix() : DEFAULT_METRIC_PREFIX;
+        return null;
     }
 
     private MetricsProcessor createMetricsProcessor(Configuration config) {
         return new RedshiftMetricsProcessor(
-                config.getMetricsConfig().getMetricTypes(),
-                config.getMetricsConfig().getExcludeMetrics());
+                config.getMetricsConfig().getIncludeMetrics(), config.getDimensions());
     }
+
+
+
+
 }

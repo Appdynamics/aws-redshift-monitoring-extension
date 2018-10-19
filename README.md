@@ -9,7 +9,7 @@ Captures Redshift statistics from Amazon CloudWatch and displays them in the App
 
 1. Run 'mvn clean install' from aws-redshift-monitoring-extension
 2. Copy and unzip AWSRedshiftMonitor-\<version\>.zip from 'target' directory into \<machine_agent_dir\>/monitors/
-3. Edit config.yaml file in AWSRedshiftMonitor/conf and provide the required configuration (see Configuration section)
+3. Edit config.yml file in AWSRedshiftMonitor/conf and provide the required configuration (see Configuration section)
 4. Restart the Machine Agent.
 
 ## Configuration
@@ -101,7 +101,7 @@ metricPrefix: "Custom Metrics|Amazon Redshift|"
 ~~~
 
 ### AWS Credentials Encryption
-To set an encrypted awsAccessKey and awsSecretKey in config.yaml, follow the steps below:
+To set an encrypted awsAccessKey and awsSecretKey in config.yml, follow the steps below:
 
 1. Download the util jar to encrypt the AWS Credentials from [here](https://github.com/Appdynamics/maven-repo/blob/master/releases/com/appdynamics/appd-exts-commons/1.1.2/appd-exts-commons-1.1.2.jar).
 2. Run command:
@@ -115,7 +115,7 @@ To set an encrypted awsAccessKey and awsSecretKey in config.yaml, follow the ste
    	java -cp "appd-exts-commons-1.1.2.jar" com.appdynamics.extensions.crypto.Encryptor test myAwsSecretKey
    	~~~
 
-3. Set the decryptionKey field in config.yaml with the encryption key used, as well as the resulting encrypted awsAccessKey and awsSecretKey in their respective fields.
+3. Set the decryptionKey field in config.yml with the encryption key used, as well as the resulting encrypted awsAccessKey and awsSecretKey in their respective fields.
 
 ## Metrics
 Typical metric path: **Application Infrastructure Performance|\<Tier\>|Custom Metrics|Amazon Redshift|\<Account Name\>|\<Region\>|Node ID|\<Node ID\>|Cluster Identifier|\<Cluster Identifier\>** followed by the metrics defined in the link below:
