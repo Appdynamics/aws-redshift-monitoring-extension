@@ -31,21 +31,22 @@ proxyConfig:
 
 # Filters metrics based on Bucket Name provided.
 # Accepts comma separated values and regex patterns.
-# ".*" is used, all are monitored and if empty, none are monitored
+# If `values:[".*"]` is used, all are monitored,
+# If `values:[]` is used, none are monitored
 
 dimensions:
    - name: "latency"
      displayName: "Latency"
-     values: [""]
+     values: []
    - name: "NodeID"
      displayName: "Node ID"
-     values: [""]
+     values: ["Leader", "Compute-0", "Compute-1"]
    - name: "ClusterIdentifier"
      displayName: "Cluster ID"
-     values: [""]
+     values: ["vishaka-redshift"]
    - name: "service class"
      displayName: "Service Class"
-     values: [""]
+     values: ["6","5"]
    - name: "Stage"
      displayName: "Query Execution Stage"
      values: [""]
@@ -62,7 +63,7 @@ dimensions:
 
 cloudWatchMonitoring: "Detailed"
 
-#If you want any other interval ( other than the mentioned "Basic" in the above configuration )
+#If you want any other interval ( other than the mentioned "Basic" or "Detailed" in the above configuration )
 #configure it here, if not leave it empty. This value is in minutes
 #cloudWatchMonitoringInterval: 0
 
@@ -142,7 +143,7 @@ metricsConfig:
 
 
       - name: "PercentageDiskSpaceUsed"
-        alias: "Disk Spaced Used (Unit - %; StatType - ave)"
+        alias: "Disk Space Used (Unit - %; StatType - ave)"
         statType: "ave"
         delta: false
         multiplier: 1
@@ -296,7 +297,7 @@ metricsConfig:
 
     maxErrorRetrySize: 3
 
-    periodInSeconds: 60
+
 
 
 

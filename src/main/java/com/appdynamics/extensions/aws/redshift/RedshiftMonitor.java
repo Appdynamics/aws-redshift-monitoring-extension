@@ -32,11 +32,11 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
     public RedshiftMonitor(){super(Configuration.class);}
 
     @Override
-    protected List<Map<String, ?>> getServers() {
+    protected int getTaskCount() {
         List list = Lists.newArrayList();
         Map<String, ?> map = Maps.newHashMap();
         list.add(map);
-        return list;
+        return 3;
     }
 
     @Override
@@ -73,5 +73,6 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
         return new RedshiftMetricsProcessor(
                 config.getMetricsConfig().getIncludeMetrics(), config.getDimensions());
     }
+
 
 }
