@@ -20,15 +20,19 @@ import com.appdynamics.extensions.aws.predicate.MultiDimensionPredicate;
 import com.appdynamics.extensions.metrics.Metric;
 import org.apache.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.LongAdder;
+
+import static com.appdynamics.extensions.aws.redshift.util.Constants.NAMESPACE;
 
 /**
  * @author Vishaka Sekar
  */
 public class RedshiftMetricsProcessor implements MetricsProcessor {
 
-    private static final String NAMESPACE = "AWS/Redshift";
+
     private List<IncludeMetric> includeMetrics;
     private List<Dimension> dimensions;
 
@@ -36,7 +40,7 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         return NAMESPACE;
     }
 
-    private static final Logger logger = Logger.getLogger(RedshiftMetricsProcessor.class);
+    private static final Logger LOGGER = Logger.getLogger(RedshiftMetricsProcessor.class);
 
     public RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
         this.includeMetrics = includeMetrics;
@@ -59,6 +63,12 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
     @Override
     public List<Metric> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
-        return null;
+
+        Map<String, String> dimensionToMetricPathNameDictionary = new HashMap<>();
+        for (Dimension dimension : dimensions) {
+            dimensionToMetricPathNameDictionary.put(dimension.getName(), dimension.getDisplayName());
+        }
+        return MetricsProcessorHelper.createMetricStatsMapForUpload(namespaceMetricStats,
+                dimensionToMetricPathNameDictionary, false);
     }
 }

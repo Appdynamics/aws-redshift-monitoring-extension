@@ -12,10 +12,15 @@ import com.appdynamics.extensions.aws.SingleNamespaceCloudwatchMonitor;
 import com.appdynamics.extensions.aws.collectors.NamespaceMetricStatisticsCollector;
 import com.appdynamics.extensions.aws.config.Configuration;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.appdynamics.extensions.aws.redshift.util.Constants.DEFAULT_METRIC_PREFIX;
+import static com.appdynamics.extensions.aws.redshift.util.Constants.MONITOR_NAME;
 
 /**
  * @author Vishaka Sekar
@@ -28,17 +33,20 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
 
     @Override
     protected List<Map<String, ?>> getServers() {
-        return null;
+        List list = Lists.newArrayList();
+        Map<String, ?> map = Maps.newHashMap();
+        list.add(map);
+        return list;
     }
 
     @Override
     public String getMonitorName() {
-        return null;
+        return MONITOR_NAME;
     }
 
     @Override
     protected String getDefaultMetricPrefix() {
-        return null;
+        return DEFAULT_METRIC_PREFIX;
     }
 
     @Override
@@ -58,15 +66,12 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
 
     @Override
     protected Logger getLogger() {
-        return null;
+        return LOGGER;
     }
 
     private MetricsProcessor createMetricsProcessor(Configuration config) {
         return new RedshiftMetricsProcessor(
                 config.getMetricsConfig().getIncludeMetrics(), config.getDimensions());
     }
-
-
-
 
 }

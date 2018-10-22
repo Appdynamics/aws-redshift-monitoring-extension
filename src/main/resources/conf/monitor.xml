@@ -23,7 +23,6 @@
         
 		<task-arguments>
 			<argument name="config-file" is-required="true" default-value="monitors/AWSRedshiftMonitor/config.yml" />
-
 		</task-arguments>
             
         <java-task>
