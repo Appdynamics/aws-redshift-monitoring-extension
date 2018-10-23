@@ -247,7 +247,7 @@ metricsConfig:
           startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
           endTimeInMinsBeforeNow: 0
 
-      - name: "WLMQueryLength"
+      - name: "WLMQueueLength"
         alias: "WLM Queue Length (Unit - Count; StatType - ave)"
         statType: "ave"
         delta: false

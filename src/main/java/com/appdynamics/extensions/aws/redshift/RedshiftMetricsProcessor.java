@@ -70,10 +70,12 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
             dimensionDisplayNameMap.put(dimension.getName(), dimension.getDisplayName());
         }
 
-        for (AccountMetricStatistics accountMetricStatistics : namespaceMetricStats.getAccountMetricStatisticsList()) {
+        for (AccountMetricStatistics accountMetricStatistics :
+                namespaceMetricStats.getAccountMetricStatisticsList()) {
             String accountPrefix = accountMetricStatistics.getAccountName();
 
-            for (RegionMetricStatistics regionMetricStatistics : accountMetricStatistics.getRegionMetricStatisticsList()) {
+            for (RegionMetricStatistics regionMetricStatistics :
+                    accountMetricStatistics.getRegionMetricStatisticsList()) {
                 String regionPrefix = regionMetricStatistics.getRegion();
 
                 for (MetricStatistic metricStatistic : regionMetricStatistics.getMetricStatisticsList()) {
@@ -118,7 +120,8 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
 
 
-    private static void buildMetricPath(StringBuilder partialMetricPath, boolean appendMetricSeparator, String... elements) {
+    private static void buildMetricPath(StringBuilder partialMetricPath,
+                                        boolean appendMetricSeparator, String... elements) {
 
         for (String element : elements) {
             partialMetricPath.append(element);
@@ -153,30 +156,36 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
 
         //<Account> | <Region> | Cluster Identifier | <ClusterId> |
-        buildMetricPath(partialMetricPath, true , clusterIDDisplayName, dimensionValueMap.get(clusterIDDimension) );
+        buildMetricPath(partialMetricPath, true , clusterIDDisplayName,
+                dimensionValueMap.get(clusterIDDimension) );
 
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> |
         if(dimensionValueMap.get(nodeIDDimension)!= null){
-            buildMetricPath(partialMetricPath, true, nodeIDDisplayName, dimensionValueMap.get(nodeIDDimension));
+            buildMetricPath(partialMetricPath, true, nodeIDDisplayName,
+                    dimensionValueMap.get(nodeIDDimension));
         }
 
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> |
         if(dimensionValueMap.get(latencyDimension) != null){
-            buildMetricPath(partialMetricPath, true, latencyDisplayName, dimensionValueMap.get(latencyDimension));
+            buildMetricPath(partialMetricPath, true, latencyDisplayName,
+                    dimensionValueMap.get(latencyDimension));
         }
 
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> | Service Class | <serviceclass> |
         if(dimensionValueMap.get(serviceClassDimension) != null){
-            buildMetricPath(partialMetricPath, true, serviceClassDimensionName, dimensionValueMap.get(serviceClassDimension));
+            buildMetricPath(partialMetricPath, true, serviceClassDimensionName,
+                    dimensionValueMap.get(serviceClassDimension));
         }
 
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> | Service Class | <serviceclass> |
         if(dimensionValueMap.get(stageDimension) != null){
-            buildMetricPath(partialMetricPath, true, stageDimensionDisplayName, dimensionValueMap.get(stageDimension));
+            buildMetricPath(partialMetricPath, true, stageDimensionDisplayName,
+                    dimensionValueMap.get(stageDimension));
         }
 
         if(dimensionValueMap.get(wmlidDimension) != null){
-            buildMetricPath(partialMetricPath, true, wmlidDimensionName, dimensionValueMap.get(wmlidDimension));
+            buildMetricPath(partialMetricPath, true, wmlidDimensionName,
+                    dimensionValueMap.get(wmlidDimension));
         }
 
 
