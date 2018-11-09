@@ -8,7 +8,6 @@
 
 package com.appdynamics.extensions.aws.redshift;
 
-import com.amazonaws.services.cloudwatch.model.Dimension;
 import com.appdynamics.extensions.aws.config.IncludeMetric;
 import com.appdynamics.extensions.aws.dto.AWSMetric;
 import com.appdynamics.extensions.aws.metric.AccountMetricStatistics;
@@ -27,7 +26,7 @@ import java.util.List;
 public class RedshiftMonitorTest {
 
 
-    NamespaceMetricStatistics namespaceMetricStatistics = new NamespaceMetricStatistics();
+    private NamespaceMetricStatistics namespaceMetricStatistics = new NamespaceMetricStatistics();
     @Before
     public void init(){
 
@@ -39,7 +38,7 @@ public class RedshiftMonitorTest {
         List<MetricStatistic> metricStatisticsList = Lists.newArrayList();
 
         for(int i = 0 ; i < 6; i++){
-            dimensionsList.add(new ArrayList<Dimension>());
+            dimensionsList.add(new ArrayList<>());
             metricsList.add(new com.amazonaws.services.cloudwatch.model.Metric());
             includeMetric.add(new IncludeMetric());
             includeMetricsList.add(includeMetric);
@@ -84,7 +83,7 @@ public class RedshiftMonitorTest {
 
         AccountMetricStatistics accountMetricStatistics = new AccountMetricStatistics();
         accountMetricStatistics.setAccountName("AppD");
-        namespaceMetricStatistics.setNamespace("AWS/S3");
+        namespaceMetricStatistics.setNamespace("AWS/Redshift");
         RegionMetricStatistics regionMetricStatistics = new RegionMetricStatistics();
         regionMetricStatistics.setRegion("us-west-1");
 

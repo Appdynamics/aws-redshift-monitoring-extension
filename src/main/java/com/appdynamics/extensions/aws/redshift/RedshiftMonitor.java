@@ -12,12 +12,7 @@ import com.appdynamics.extensions.aws.SingleNamespaceCloudwatchMonitor;
 import com.appdynamics.extensions.aws.collectors.NamespaceMetricStatisticsCollector;
 import com.appdynamics.extensions.aws.config.Configuration;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.log4j.Logger;
-
-import java.util.List;
-import java.util.Map;
 
 import static com.appdynamics.extensions.aws.redshift.util.Constants.DEFAULT_METRIC_PREFIX;
 import static com.appdynamics.extensions.aws.redshift.util.Constants.MONITOR_NAME;
@@ -32,12 +27,7 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
     public RedshiftMonitor(){super(Configuration.class);}
 
     @Override
-    protected int getTaskCount() {
-        List list = Lists.newArrayList();
-        Map<String, ?> map = Maps.newHashMap();
-        list.add(map);
-        return 3;
-    }
+    protected int getTaskCount() { return 3; }
 
     @Override
     public String getMonitorName() {

@@ -44,7 +44,7 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
     private static final Logger LOGGER = Logger.getLogger(RedshiftMetricsProcessor.class);
 
-    public RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
+    RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
         this.includeMetrics = includeMetrics;
         this.dimensions = dimensions;
     }
