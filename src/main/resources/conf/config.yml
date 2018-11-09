@@ -37,17 +37,17 @@ proxyConfig:
 dimensions:
    - name: "latency"
      displayName: "Latency"
-     values: []
+     values: [""]
    - name: "NodeID"
      displayName: "Node ID"
-     values: ["Leader", "Compute-0", "Compute-1"]
+     values: [""]
    - name: "ClusterIdentifier"
      displayName: "Cluster ID"
-     values: ["vishaka-redshift"]
+     values: [""]
    - name: "service class"
      displayName: "Service Class"
-     values: ["6","5"]
-   - name: "Stage"
+     values: [""]
+   - name: "stage"
      displayName: "Query Execution Stage"
      values: [""]
    - name: "wmlid"
@@ -61,7 +61,7 @@ dimensions:
 # Basic will poll CloudWatch API every 5 min
 # Since AWS Redshift sends metrics to CloudWatch every minute, detailed  monitoring is enabled by default
 
-cloudWatchMonitoring: "Detailed"
+cloudWatchMonitoring: "Basic"
 
 #If you want any other interval ( other than the mentioned "Basic" or "Detailed" in the above configuration )
 #configure it here, if not leave it empty. This value is in minutes
@@ -87,201 +87,201 @@ metricsConfig:
     # Observed value to the Controller
 
     includeMetrics:
-      - name: "CPUUtilization"
-        alias: "CPU Utilization (Unit - %; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "CPUUtilization"
+         alias: "CPU Utilization (Unit - %; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "DatabaseConnections"
-        alias: "DB Connections (Unit - Count; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "DatabaseConnections"
+         alias: "DB Connections (Unit - Count; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "MaintenanceMode"
-        alias: "Maintenance Mode (Values - 1/0; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "OBSERVATION"
-        timeRollUpType: "CURRENT"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "MaintenanceMode"
+         alias: "Maintenance Mode (Values - 1/0; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "OBSERVATION"
+         timeRollUpType: "CURRENT"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "HealthStatus"
-        alias: "Health Status (Values - 1/0; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "OBSERVATION"
-        timeRollUpType: "CURRENT"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "HealthStatus"
+         alias: "Health Status (Values - 1/0; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "OBSERVATION"
+         timeRollUpType: "CURRENT"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "NetworkReceiveThroughput"
-        alias: "Network Receive Throughput (Unit - Bytes/sec; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "NetworkReceiveThroughput"
+         alias: "Network Receive Throughput (Unit - Bytes/sec; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "NetworkTransmitThroughput"
-        alias: "Network Transmit Throughput (Unit - Bytes/sec; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "NetworkTransmitThroughput"
+         alias: "Network Transmit Throughput (Unit - Bytes/sec; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
 
-      - name: "PercentageDiskSpaceUsed"
-        alias: "Disk Space Used (Unit - %; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "PercentageDiskSpaceUsed"
+         alias: "Disk Space Used (Unit - %; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "QueriesCompletedPerSecond"
-        alias: "Queries Completed Per Sec(Unit - Count; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
-        metricsTimeRange:
-          startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
+       - name: "QueriesCompletedPerSecond"
+         alias: "Queries Completed Per Sec(Unit - Count; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
+         metricsTimeRange:
+          startTimeInMinsBeforeNow: 7 #plus Cloudwatch latency
           endTimeInMinsBeforeNow: 0
 
-      - name: "QueryDuration"
-        alias: "Query Duration (Unit - Microseconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
-        metricsTimeRange:
-          startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
+       - name: "QueryDuration"
+         alias: "Query Duration (Unit - Microseconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
+         metricsTimeRange:
+          startTimeInMinsBeforeNow: 7 #plus Cloudwatch latency
           endTimeInMinsBeforeNow: 0
 
-      - name: "QueryRuntimeBreakdown"
-        alias: "Query Runtime Breakdown(Unit - Milliseconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
-        metricsTimeRange:
-          startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
+       - name: "QueryRuntimeBreakdown"
+         alias: "QueryRuntimeBreakdown (Unit - Milliseconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
+         metricsTimeRange:
+          startTimeInMinsBeforeNow: 7 #plus Cloudwatch latency
           endTimeInMinsBeforeNow: 0
 
-      - name: "ReadIOPS"
-        alias: "Disk Reads (Unit - Count/sec; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "ReadIOPS"
+         alias: "Disk Reads (Unit - Count/sec; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "ReadLatency"
-        alias: "Read Latency (Unit - Seconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "ReadLatency"
+         alias: "Read Latency (Unit - Seconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "ReadThroughput"
-        alias: "Read Throughput (Unit - Bytes; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "ReadThroughput"
+         alias: "Read Throughput (Unit - Bytes; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "TotalTableCount"
-        alias: "Total Table Count (Unit - Count; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "TotalTableCount"
+         alias: "Total Table Count (Unit - Count; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "WLMQueriesCompletedPerSecond"
-        alias: "WLM Queries Completed(Unit - Count/sec; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
-        metricsTimeRange:
-          startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
-          endTimeInMinsBeforeNow: 0
+       - name: "WLMQueriesCompletedPerSecond"
+         alias: "WLM Queries Completed(Unit - Count/sec; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
+         metricsTimeRange:
+           startTimeInMinsBeforeNow:  7
+           endTimeInMinsBeforeNow: 0
 
-      - name: "WLMQueryDuration"
-        alias: "WLM Query Duration (Unit - Microseconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
-        metricsTimeRange:
-          startTimeInMinsBeforeNow:  5 #plus Cloudwatch latency
-          endTimeInMinsBeforeNow: 0
+       - name: "WLMQueryDuration"
+         alias: "WLM Query Duration (Unit - Microseconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
+         metricsTimeRange:
+           startTimeInMinsBeforeNow: 7
+           endTimeInMinsBeforeNow: 0
 
-      - name: "WLMQueueLength"
-        alias: "WLM Queue Length (Unit - Count; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "WLMQueueLength"
+         alias: "WLM Queue Length (Unit - Count; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "WriteIOPS"
-        alias: "Disk Writes (Unit - Count/seconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "WriteIOPS"
+         alias: "Disk Writes (Unit - Count/seconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "WriteLatency"
-        alias: "Write Latency (Unit - Seconds; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "WriteLatency"
+         alias: "Write Latency (Unit - Seconds; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
-      - name: "WriteThroughput"
-        alias: "Write Throughput (Unit - Bytes; StatType - ave)"
-        statType: "ave"
-        delta: false
-        multiplier: 1
-        aggregationType: "AVERAGE"
-        timeRollUpType: "AVERAGE"
-        clusterRollUpType: "INDIVIDUAL"
+       - name: "WriteThroughput"
+         alias: "Write Throughput (Unit - Bytes; StatType - ave)"
+         statType: "ave"
+         delta: false
+         multiplier: 1
+         aggregationType: "AVERAGE"
+         timeRollUpType: "AVERAGE"
+         clusterRollUpType: "INDIVIDUAL"
 
     metricsTimeRange:
       startTimeInMinsBeforeNow: 9

@@ -92,7 +92,9 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
                     arrangeMetricPathHierarchy(partialMetricPath, dimensionDisplayNameMap, dimensionValueMap);
                     String awsMetricName = metricStatistic.getMetric().getIncludeMetric().getName();
+
                     buildMetricPath(partialMetricPath, false, awsMetricName);
+
                     String fullMetricPath = metricStatistic.getMetricPrefix() + partialMetricPath;
                     if (metricStatistic.getValue() != null) {
                         Map<String, Object> metricProperties = new HashMap<>();
@@ -145,7 +147,7 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         String serviceClassDimension = "service class";
         String serviceClassDimensionName = dimensionDisplayNameMap.get(serviceClassDimension);
 
-        String stageDimension = "Stage";
+        String stageDimension = "stage";
         String stageDimensionDisplayName = dimensionDisplayNameMap.get(stageDimension);
 
         String wmlidDimension = "wmlid";

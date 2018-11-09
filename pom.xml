@@ -97,7 +97,7 @@
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<manifestEntries>
-										<Implementation-Title>AWS S3 Monitor v${project.version} Build Date ${maven.build.timestamp}</Implementation-Title>
+										<Implementation-Title>AWS Redshift Monitor v${project.version} Build Date ${maven.build.timestamp}</Implementation-Title>
 										<Main-Class>com.appdynamics.extensions.workbench.WorkbenchServerLauncher</Main-Class>
 									</manifestEntries>
 								</transformer>

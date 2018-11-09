@@ -75,4 +75,6 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
     }
 
 
+
+
 }
