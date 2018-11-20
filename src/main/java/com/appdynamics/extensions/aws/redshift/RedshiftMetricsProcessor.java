@@ -33,20 +33,17 @@ import static com.appdynamics.extensions.aws.redshift.util.Constants.NAMESPACE;
  * @author Vishaka Sekar
  */
 public class RedshiftMetricsProcessor implements MetricsProcessor {
-
-
     private List<IncludeMetric> includeMetrics;
     private List<Dimension> dimensions;
-
-    public String getNamespace() {
-        return NAMESPACE;
-    }
-
     private static final Logger LOGGER = Logger.getLogger(RedshiftMetricsProcessor.class);
 
     RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
         this.includeMetrics = includeMetrics;
         this.dimensions = dimensions;
+    }
+
+    public String getNamespace() {
+        return NAMESPACE;
     }
 
     @Override
@@ -63,25 +60,19 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
 
     @Override
     public List<Metric> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
-
         List<Metric> stats = new ArrayList<>();
         Map<String, String> dimensionDisplayNameMap = Maps.newHashMap();
         for (Dimension dimension : dimensions) {
             dimensionDisplayNameMap.put(dimension.getName(), dimension.getDisplayName());
         }
-
         for (AccountMetricStatistics accountMetricStatistics :
                 namespaceMetricStats.getAccountMetricStatisticsList()) {
             String accountPrefix = accountMetricStatistics.getAccountName();
-
             for (RegionMetricStatistics regionMetricStatistics :
                     accountMetricStatistics.getRegionMetricStatisticsList()) {
                 String regionPrefix = regionMetricStatistics.getRegion();
-
                 for (MetricStatistic metricStatistic : regionMetricStatistics.getMetricStatisticsList()) {
-
                     Map<String, String> dimensionValueMap = Maps.newHashMap();
-
                     for (com.amazonaws.services.cloudwatch.model.Dimension dimension :
                             metricStatistic.getMetric().getMetric().getDimensions()) {
                         dimensionValueMap.put(dimension.getName(), dimension.getValue());
@@ -89,12 +80,9 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
                     StringBuilder partialMetricPath = new StringBuilder();
                     buildMetricPath(partialMetricPath, true,
                             accountPrefix, regionPrefix);
-
                     arrangeMetricPathHierarchy(partialMetricPath, dimensionDisplayNameMap, dimensionValueMap);
                     String awsMetricName = metricStatistic.getMetric().getIncludeMetric().getName();
-
                     buildMetricPath(partialMetricPath, false, awsMetricName);
-
                     String fullMetricPath = metricStatistic.getMetricPrefix() + partialMetricPath;
                     if (metricStatistic.getValue() != null) {
                         Map<String, Object> metricProperties = new HashMap<>();
@@ -111,19 +99,14 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
                     } else {
                         LOGGER.debug(String.format("Ignoring metric [ %s ] which has value null", fullMetricPath));
                     }
-
                 }
-
             }
         }
-
         return stats;
     }
 
-
-
-    private static void buildMetricPath(StringBuilder partialMetricPath,
-                                        boolean appendMetricSeparator, String... elements) {
+    private static void buildMetricPath(StringBuilder partialMetricPath, boolean appendMetricSeparator,
+                                        String... elements) {
 
         for (String element : elements) {
             partialMetricPath.append(element);
@@ -153,10 +136,6 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         String wmlidDimension = "wmlid";
         String wmlidDimensionName = dimensionDisplayNameMap.get(wmlidDimension);
 
-
-
-
-
         //<Account> | <Region> | Cluster Identifier | <ClusterId> |
         buildMetricPath(partialMetricPath, true , clusterIDDisplayName,
                 dimensionValueMap.get(clusterIDDimension) );
@@ -167,12 +146,14 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
                     dimensionValueMap.get(nodeIDDimension));
         }
 
+        // #TODO In the comment blocks below, you have only added the case when Node Id is present, can you please add the other case/cases also?
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> |
         if(dimensionValueMap.get(latencyDimension) != null){
             buildMetricPath(partialMetricPath, true, latencyDisplayName,
                     dimensionValueMap.get(latencyDimension));
         }
 
+        // #TODO As per our discussion, please take a rellok into the comment blocks.
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> | Service Class | <serviceclass> |
         if(dimensionValueMap.get(serviceClassDimension) != null){
             buildMetricPath(partialMetricPath, true, serviceClassDimensionName,
@@ -189,8 +170,5 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
             buildMetricPath(partialMetricPath, true, wmlidDimensionName,
                     dimensionValueMap.get(wmlidDimension));
         }
-
-
     }
-
 }

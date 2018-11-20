@@ -1,3 +1,4 @@
+# TODO Can you please update the comment block with just SIM and no SIM comment?
 #This will create the metrics of all tiers(not recommended)
 # Use this only if sim is enabled
 #metricPrefix: "Custom Metrics|Amazon Redshift|"
