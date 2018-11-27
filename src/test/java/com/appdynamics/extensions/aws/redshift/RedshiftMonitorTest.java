@@ -25,11 +25,9 @@ import java.util.List;
 
 public class RedshiftMonitorTest {
 
-
     private NamespaceMetricStatistics namespaceMetricStatistics = new NamespaceMetricStatistics();
     @Before
     public void init(){
-
         List<List<com.amazonaws.services.cloudwatch.model.Dimension>> dimensionsList = new ArrayList<>();
         List<com.amazonaws.services.cloudwatch.model.Metric> metricsList = Lists.newArrayList();
         List<IncludeMetric> includeMetric = Lists.newArrayList();
@@ -156,10 +154,5 @@ public class RedshiftMonitorTest {
                 "Custom Metric|AWS Redshift|AppD|us-west-1|Cluster Identifier|my-cluster|TestMetric4");
         Assert.assertEquals(stats.get(5).getMetricPath(),
                 "Custom Metric|AWS Redshift|AppD|us-west-1|Cluster Identifier|my-cluster|Node ID|Compute-0|TestMetric5");
-
-
     }
-
-
-
 }

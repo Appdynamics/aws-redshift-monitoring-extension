@@ -64,7 +64,4 @@ public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configurat
                 config.getMetricsConfig().getIncludeMetrics(), config.getDimensions());
     }
 
-
-
-
 }

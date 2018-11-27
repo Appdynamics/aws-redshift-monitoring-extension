@@ -1,14 +1,10 @@
-# TODO Can you please update the comment block with just SIM and no SIM comment?
-#This will create the metrics of all tiers(not recommended)
-# Use this only if sim is enabled
+# Use this only if SIM is enabled
 #metricPrefix: "Custom Metrics|Amazon Redshift|"
 
-#This will create it in specific Tier/Component.
-#Make sure to replace <COMPONENT_ID> with the appropriate one from your environment.
+# If SIM is not enabled, then use this
+metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon Redshift|"
 #To find the <COMPONENT_ID> in your environment,
 #please follow the screenshot https://docs.appdynamics.com/display/PRO42/Build+a+Monitoring+Extension+Using+Java
-
-metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon Redshift|"
 
 # awsAccessKey, awsSecretKey, displayAccountName are mandatory fields.
 accounts:

@@ -1,10 +1,4 @@
 package com.appdynamics.extensions.aws.redshift.util;
-// #TODO Can you please remove the below block.
-/*
-*
-*
-*/
-
 
 public class Constants {
 

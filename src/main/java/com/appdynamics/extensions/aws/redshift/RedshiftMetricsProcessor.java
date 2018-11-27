@@ -140,32 +140,44 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         buildMetricPath(partialMetricPath, true , clusterIDDisplayName,
                 dimensionValueMap.get(clusterIDDimension) );
 
+        // Adding each node in the cluster
         //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> |
         if(dimensionValueMap.get(nodeIDDimension)!= null){
             buildMetricPath(partialMetricPath, true, nodeIDDisplayName,
                     dimensionValueMap.get(nodeIDDimension));
         }
 
-        // #TODO In the comment blocks below, you have only added the case when Node Id is present, can you please add the other case/cases also?
-        //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> |
+        // if this is a cluster level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> |
+        // else if this is a node-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> |
         if(dimensionValueMap.get(latencyDimension) != null){
             buildMetricPath(partialMetricPath, true, latencyDisplayName,
                     dimensionValueMap.get(latencyDimension));
         }
 
-        // #TODO As per our discussion, please take a rellok into the comment blocks.
-        //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> | Service Class | <serviceclass> |
+        // if this is a cluster-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Service Class | <serviceclass> |
+        // else if this is a node-level metric,
+        //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Service Class | <serviceclass> |
         if(dimensionValueMap.get(serviceClassDimension) != null){
             buildMetricPath(partialMetricPath, true, serviceClassDimensionName,
                     dimensionValueMap.get(serviceClassDimension));
         }
 
-        //<Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> | Service Class | <serviceclass> |
+        // if this is a cluster-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Service Class | <serviceclass> |
+        // else if this is a node-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Service Class | <serviceclass> |
         if(dimensionValueMap.get(stageDimension) != null){
             buildMetricPath(partialMetricPath, true, stageDimensionDisplayName,
                     dimensionValueMap.get(stageDimension));
         }
 
+        // if this is a cluster-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | WMLID | <wmlid> |
+        // else if this is a node-level metric,
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | WMLID | <wmlid> |
         if(dimensionValueMap.get(wmlidDimension) != null){
             buildMetricPath(partialMetricPath, true, wmlidDimensionName,
                     dimensionValueMap.get(wmlidDimension));
