@@ -148,7 +148,7 @@ public class RedshiftMetricsProcessor implements MetricsProcessor {
         }
 
         // if this is a cluster level metric,
-        // <Account> | <Region> | Cluster Identifier | <ClusterId> |
+        // <Account> | <Region> | Cluster Identifier | <ClusterId> | Latency | <LatencyValue> |
         // else if this is a node-level metric,
         // <Account> | <Region> | Cluster Identifier | <ClusterId> | Node ID | <NodeId> | Latency | <LatencyValue> |
         if(dimensionValueMap.get(latencyDimension) != null){
