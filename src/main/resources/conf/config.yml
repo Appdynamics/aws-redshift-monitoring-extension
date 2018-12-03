@@ -26,7 +26,7 @@ proxyConfig:
     username:
     password:
 
-# Filters metrics based on Bucket Name provided.
+# Filters metrics based on provided Dimension values.
 # Accepts comma separated values and regex patterns.
 # If `values:[".*"]` is used, all are monitored,
 # If `values:[]` is used, none are monitored
