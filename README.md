@@ -190,7 +190,7 @@ Always feel free to fork and contribute any changes directly here on [GitHub](ht
 ## Version
    |Name|Version|
    |--------------------------|------------|
-   |Extension Version         |2.0.0       |
+   |Extension Version         |2.0.1       |
    |Controller Compatibility  |4.4 or Later|
-   |Last Update               |Oct 23, 2018 |
+   |Last Update               |Mar 22, 2019 |
    |List of Changes           |[Change Log](https://github.com/Appdynamics/aws-redshift-monitoring-extension/blob/master/CHANGELOG.md)|

@@ -4,3 +4,6 @@
 * config file extension changed from yaml to yml
 * Added includeMetrics section in config.yml, multi-dimensional filtering,changeLog
 * Added test cases for overridden metric path
+
+### Version 2.0.1 - March 22, 2019
+* Updated the aws-cloudwatch-exts-commons to 2.0.1.1 from 2.0.0
