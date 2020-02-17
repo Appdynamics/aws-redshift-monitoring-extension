@@ -10,7 +10,12 @@ Captures AWS Redshift statistics from Amazon CloudWatch and displays them in the
     cloudwatch:GetMetricStatistics
     ```
 2. In order to use this extension, you do need a [Standalone JAVA Machine Agent](https://docs.appdynamics.com/display/PRO44/Standalone+Machine+Agents) or [SIM Agent](https://docs.appdynamics.com/display/PRO44/Server+Visibility).  For more details on downloading these products, please  visit [here](https://download.appdynamics.com/).
-3. The extension needs to be able to connect to AWS Cloudwatch in order to collect and send metrics. To do this, you will have to either establish a remote connection in between the extension and the product using access key and secret key, or have an agent running on EC2 instance, which you can use with instance profile.
+3. The extension needs to be able to connect to AWS CloudWatch in order to collect and send metrics. To do this, you will have to either establish a remote connection in between the extension and the product using access key and secret key, or have an agent running on EC2 instance, which you can use with instance profile.
+4. **Agent Compatibility:**
+   **Note** : 
+   * This extension is compatible with Machine Agent version 4.5.13 or later.
+   * If you are seeing warning messages while starting the Machine Agent, update the http-client and http-core JARs in `{MACHINE_AGENT_HOME}/monitorsLibs` to httpclient-4.5.9 and httpcore-4.4.12 to make this warning go away. 
+   * To make this extension work on Machine Agent < 4.5.13: The http-client and http-core JARs in `{MACHINE_AGENT_HOME}/monitorsLibs` has to be manually be updated to httpclient-4.5.9 and httpcore-4.4.12
 
 
 ## Installation
@@ -190,7 +195,8 @@ Always feel free to fork and contribute any changes directly here on [GitHub](ht
 ## Version
    |Name|Version|
    |--------------------------|------------|
-   |Extension Version         |2.0.1       |
+   |Extension Version         |2.0.2      |
    |Controller Compatibility  |4.4 or Later|
-   |Last Update               |Mar 22, 2019 |
+   |Agent Compatibility| Machine Agent version 4.5.13 or later|
+   |Last Update               |Feb 04, 2020 |
    |List of Changes           |[Change Log](https://github.com/Appdynamics/aws-redshift-monitoring-extension/blob/master/CHANGELOG.md)|
