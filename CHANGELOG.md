@@ -1,4 +1,7 @@
-#Version 2.0.2
+### Version 2.0.3
+Updated config.yml with controllerInfo and healthchecks. 
+
+###Version 2.0.2
 Updated aws-cloudwatch-exts-commons from 2.0.0 to 2.2.0
 
 ### Version 2.0.1 - March 22, 2019
