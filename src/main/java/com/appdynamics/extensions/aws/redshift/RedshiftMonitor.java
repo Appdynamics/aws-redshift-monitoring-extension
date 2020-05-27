@@ -12,7 +12,9 @@ import com.appdynamics.extensions.aws.SingleNamespaceCloudwatchMonitor;
 import com.appdynamics.extensions.aws.collectors.NamespaceMetricStatisticsCollector;
 import com.appdynamics.extensions.aws.config.Configuration;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
-import org.apache.log4j.Logger;
+import com.appdynamics.extensions.logging.ExtensionsLoggerFactory;
+import org.slf4j.Logger;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import static com.appdynamics.extensions.aws.redshift.util.Constants.MONITOR_NAM
  */
 public class RedshiftMonitor extends SingleNamespaceCloudwatchMonitor<Configuration> {
 
-    private static final Logger LOGGER = Logger.getLogger(RedshiftMonitor.class);
+    private static final Logger LOGGER = ExtensionsLoggerFactory.getLogger(RedshiftMonitor.class);
 
     public RedshiftMonitor(){super(Configuration.class);}
 

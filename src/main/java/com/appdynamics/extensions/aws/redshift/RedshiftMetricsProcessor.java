@@ -16,9 +16,11 @@ import com.appdynamics.extensions.aws.metric.*;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessorHelper;
 import com.appdynamics.extensions.aws.predicate.MultiDimensionPredicate;
+import com.appdynamics.extensions.logging.ExtensionsLoggerFactory;
 import com.appdynamics.extensions.metrics.Metric;
 import com.google.common.collect.Maps;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ import static com.appdynamics.extensions.aws.redshift.util.Constants.NAMESPACE;
 public class RedshiftMetricsProcessor implements MetricsProcessor {
     private List<IncludeMetric> includeMetrics;
     private List<Dimension> dimensions;
-    private static final Logger LOGGER = Logger.getLogger(RedshiftMetricsProcessor.class);
+    private static final Logger LOGGER = ExtensionsLoggerFactory.getLogger(RedshiftMetricsProcessor.class);
 
     RedshiftMetricsProcessor(List<IncludeMetric> includeMetrics, List<Dimension> dimensions) {
         this.includeMetrics = includeMetrics;
