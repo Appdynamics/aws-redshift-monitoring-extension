@@ -319,6 +319,8 @@ regionEndPoints:
   sa-east-1 : monitoring.sa-east-1.amazonaws.com
   us-gov-west-1 : monitoring.us-gov-west-1.amazonaws.com
 
+#Encryption key for your controllerInfo password
+encryptionKey: ""
 
 # If any of the following fields are not set, the values of the specific fields are set from the system properties of the corresponding fields as specified in the comments.
 # If the system properties are not set for the field, then the data is retrieved from machine agent configFile.
@@ -338,5 +340,3 @@ controllerInfo:
   applicationName: "" # -Dappdynamics.agent.applicationName
   tierName: "" # -Dappdynamics.agent.tierName
   nodeName: "" # -Dappdynamics.agent.nodeName
-
-enableHealthChecks: true # If not set, will be retrieved from "-Dappdynamics.agent.monitors.healthchecks.enable=true". Defaults to true.
