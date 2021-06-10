@@ -195,8 +195,8 @@ Always feel free to fork and contribute any changes directly here on [GitHub](ht
 ## Version
    |Name|Version|
    |--------------------------|------------|
-   |Extension Version         |2.0.4    |
+   |Extension Version         |2.0.5       |
    |Controller Compatibility  |4.4 or Later|
    |Agent Compatibility| Machine Agent version 4.5.13 or later|
-   |Last Update               |May 07, 2020 |
+   |Last Update               |Jan 22, 2021|
    |List of Changes           |[Change Log](https://github.com/Appdynamics/aws-redshift-monitoring-extension/blob/master/CHANGELOG.md)|
